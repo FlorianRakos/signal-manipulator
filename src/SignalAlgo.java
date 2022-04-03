@@ -13,7 +13,7 @@ public class SignalAlgo {
 		double[] A = new double[n];
 		for (int i = 0; i<n;i++) {
 			A[i] = Math.sin(i);
-			System.out.println("a: " + A[i] + " n: " + n);
+			//System.out.println("a: " + A[i] + " n: " + n);
 		}
 		return A;
 	}
@@ -22,7 +22,7 @@ public class SignalAlgo {
 		double[] A = new double[n];
 		for (int i = 0; i<n;i++) {
 			A[i] = Math.sin(i*2*Math.PI/t);
-			System.out.println("a: " + A[i] + " n: " + n);
+			//System.out.println("a: " + A[i] + " n: " + n);
 		}
 		return A;
 	}
@@ -31,7 +31,7 @@ public class SignalAlgo {
 		double[] A = new double[n];
 		for (int i = 0; i<n;i++) {
 			A[i] = Math.cos(i);
-			System.out.println("a: " + A[i] + " n: " + n);
+			//System.out.println("a: " + A[i] + " n: " + n);
 		}
 
 		return A;
@@ -41,7 +41,7 @@ public class SignalAlgo {
 		double[] A = new double[n];
 		for (int i = 0; i<n;i++) {
 			A[i] = Math.cos(i*2*Math.PI/t);
-			System.out.println("a: " + A[i] + " n: " + n);
+			//System.out.println("a: " + A[i] + " n: " + n);
 		}
 
 		return A;
@@ -98,5 +98,19 @@ public class SignalAlgo {
 			gBar[i] = Math.round(g[i]);
 		}
 		return gBar;
+	}
+
+	static double signalNoiseRat (double[] signal, double[] noise, boolean inDB) {
+		double sigSum = 0;
+		double noiSum = 0;
+
+		for (int i = 0; i < signal.length; i++) {
+			sigSum += signal[i] * signal[i];
+			noiSum += noise[i] * noise[i];
+		}
+		if (! inDB)	return sigSum / noiSum;
+
+		return (10 * Math.log10(sigSum / noiSum));
+
 	}
 }
